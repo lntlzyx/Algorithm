@@ -21,8 +21,8 @@ function createXxbSlb(){
 		p.pre=dsSlbr;
 		dsSlbr=p;
 	}
-	//	dsSlbr.next=dsSlb;
-	//	dsSlb.pre=dsSlbr;
+		dsSlbr.next=dsSlb;
+		dsSlb.pre=dsSlbr;
 	console.log(dsSlb);		 
 }
 	//查找
@@ -37,10 +37,14 @@ function createXxbSlb(){
 						console.log(head);
 					return head;
 					}
-			head=head.next;
+			if(head===dsSlbr)
+				break;
+			else
+				head=head.next;
+			
 		}
 		console.log("未找到");
-		return head;		
+		return null;		
 	}
 	//插入 尾插入
 	function insertXxbSlb(ivalue){
@@ -51,9 +55,11 @@ function createXxbSlb(){
 		if(pos){
 			console.log("数值已存在");return;
 		}
-		var p={data:ivalue,pre:dsSlbr,next:null};
+		var p={data:ivalue,pre:dsSlbr,next:dsSlb};
+		dsSlb.pre=p;
 		dsSlbr.next=p;
 		dsSlbr=p;
+		
 		console.log(dsSlb);
 	}
 	//删除
@@ -67,16 +73,13 @@ function createXxbSlb(){
 		}
 		pos.pre.next=pos.next;
 		
-		if(dsSlbr===pos)
+		if(dsSlbr===pos){
 				dsSlbr=pos.pre;
+				dsSlb.pre=pos.pre;
+		}
 		else
 				pos.next.pre=pos.pre;
-		/*
-		if(!pos.next){
-			dsSlbr=pos.pre;		
-		}else
-			pos.next.pre=pos.pre;	
-		*/
+
 		console.log(dsSlb);
 	}	
 </script>
