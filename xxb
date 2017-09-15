@@ -1,0 +1,18 @@
+<html>
+<body>
+
+一、线性表<br>
+1、双链表
+<div>
+创建:<input type='button' value='提交' onclick='createXxbSlb()'>
+<div>插入:<input type='text' ><input type='button' value='提交' onclick='insertXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
+<div>查找:<input type='text' ><input type='button' value='提交'  onclick='findXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div><div>
+删除:<input type='text' ><input type='button' value='提交'  onclick='delXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
+
+
+<script>
+
+</script>
+
+</body>
+</html>
