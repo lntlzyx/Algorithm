@@ -4,14 +4,32 @@
 一、线性表<br>
 1、双链表
 <div>
-创建:<input type='button' value='提交' onclick='createXxbSlb()'>
-<div>插入:<input type='text' ><input type='button' value='提交' onclick='insertXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
-<div>查找:<input type='text' ><input type='button' value='提交'  onclick='findXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div><div>
-删除:<input type='text' ><input type='button' value='提交'  onclick='delXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
+	创建:<input style='width:50px' type='button' value='提交' onclick='createXxbSlb()'>
+<div>插入:<input type='text' style='width:50px' ><input type='button' value='提交' onclick='insertXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
+<div>查找:<input style='width:50px' type='text' ><input type='button' value='提交'  onclick='findXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div><div>
+删除:<input type='text'style='width:50px'  ><input  type='button' value='提交'  onclick='delXxbSlb(this.parentNode.getElementsByTagNames("input")[0].value)'></div>
 
 
 <script>
+var vals=['a','b','c','d','e','f','i','s'];
 
+var dsSlb=null,dsSlbR=null;
+
+function createXxbSlb(){
+	var p={data:null,pre:null,next:null};
+	dsSlb=p;
+	dsSlbr=p;
+	
+	for(var i=0,l=vals.length;i<l;i++){
+		p={data:vals[i],pre:null,next:null};
+		dsSlbr.next=p;
+		p.pre=dsSlbr;
+		dsSlbr=p;
+	}
+	dsSlbr.next=dsSlb;
+	dsSlb.pre=dsSlbr;
+	console.log(dsSlb);		 
+}
 </script>
 
 </body>
