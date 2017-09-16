@@ -38,8 +38,6 @@ var dsQue={
     count:0
 };
 
-var vals=['a','b','c','d','e','f','s','i'];
-    
 //初始化队列
 function initQuery(query){
 	query.data=[];
@@ -103,66 +101,82 @@ function queryFront(query){
 
 <br>4、链队列:<br>
 
-初始化:<input type='button' value='提交'  onclick='initStackLi(dsStaLi)'>
-<div><span>判栈空:</span>
-<input type='button' value='提交'  onclick='stackEmptyLi(dsStaLi)'>
-</div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
-<input type='button' value='提交'   onclick='stackPushLi(dsStaLi,this.parentNode.getElementsByTagName("input")[0].value)'>
-</div><div><span>退栈:</span><input id='fshvalue' type="text"  class='valinput'  >
-<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackPopLi(dsStaLi)'>
-</div><div><span>取栈顶元素:</span><input id='fshvalue' type="text"  class='valinput'  >
-<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackTopLi(dsStaLi)'>
+初始化:<input type='button' value='提交'  onclick='initQueryLi(dsQueLi)'>
+<div><div><span>判队空:</span>
+<input type='button' value='提交'  onclick='queryEmpty(dsQueLi)'>
+</div><div><span>进队:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='enQueryLi(dsQueLi,this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>出队:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=delQueryLi(dsQueLi)'>
+</div><div><span>取队首元素:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=queryFrontLi(dsQueLi)'>
 </div></div>
 
 <script>
 
-//链栈 --
-var dsStaLi={
-	top:null
-    };
+//链队列 --
+var dsQueLi={
+    front:null,
+    rear:null
+};
 
-var vals=['a','b','c','d','e','f','s','i'];
+//初始化队列
+function initQueryLi(query){
+    query.front=null;
+    query.rear=null;
+    console.log(dsQueLi);
+}
+
+//判队列空
+function queryEmptyLi(query){
+    console.log(dsQueLi);
+    return query.front===null;
+}
+
+//进队
+function enQueryLi(query,value){
+	if(value===undefined || !value){
+    	console.log("请输入数值");return;
+    }
+	var p={data:value,next:null};
+
+	if(query.rear===null)
+        query.front=p;
+    else    
+		query.rear.next=p;
+        
+    query.rear=p;
+
+    console.log(dsQueLi);
+}
+
+//出队
+function delQueryLi(query){
+	var cdata;
+	if(queryEmptyLi(query)){
+    	console.log("队已空");return;
+    }
+    cdata=query.front.data;
     
-//初始化栈 
-function initStackLi(stack){
-    stack.top=null;
-    console.log(dsStaLi);
+    if(query.front==query.rear)
+    	query.rear=null;
+        
+    query.front=query.front.next;
+
+    console.log(dsQueLi);
+    return cdata;
 }
 
-//判栈空
-function stackEmptyLi(stack){
-    return stack.top===null;
-    console.log(dsStaLi);
-}
-
-//进栈
-function stackPushLi(stack,value){
-	var newSta={data:value,next:stack.top};
-	stack.top=newSta;
-    console.log(dsStaLi);
-}
-
-//退栈
-function stackPopLi(stack){
-	var sdata;
-	if(stackEmptyLi(stack)){
-   		console.log("栈已空");return;
+//取队首元素
+function queryFrontLi(query){
+	if(queryEmptyLi(query)){
+    	console.log("队列已空");return;    
     }
-    sdata=stack.top.data;
-    stack.top=stack.top.next;
-    console.log(dsStaLi);
-	return sdata;
-}
-
-//取栈顶元素
-function stackTopLi(stack){
-	if(stackEmptyLi(stack)){
-    	console.log("栈已空");return;    
-    }
-    console.log(dsStaLi.top.data);
-    return stack.top.data;
+    console.log(dsQueLi.front.data);
+    return query.front.data;
 }
 </script>
+
 
 </body>
 </html> 
