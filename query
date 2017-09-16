@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+二、栈和队列:
+
+<br>3、顺序队列:<br>
+
+初始化:<input type='button' value='提交'  onclick='initQuery(dsQue)'>
+<div><div><span>判队空:</span>
+<input type='button' value='提交'  onclick='queryEmpty(dsQue)'>
+</div><div><span>判队满:</span>
+<input type='button' value='提交'  onclick='queryFull(dsQue)'>
+</div><div><span>进队:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='enQuery(dsQue,this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>出队:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=delQuery(dsQue)'>
+</div><div><span>取队首元素:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=queryFront(dsQue)'>
+</div></div>
+
+<script>
+
+//顺序队列 --
+var dsQue={
+	data:[],
+    maxsize:4,
+    front:0,
+    rear:0,
+    count:0
+};
+
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//初始化队列
+function initQuery(query){
+	query.data=[];
+    query.front=0;
+    query.rear=0;
+    query.count=0;
+    console.log(dsQue);
+}
+
+//判队列空
+function queryEmpty(query){
+    console.log(dsQue);
+    return query.count===0;
+}
+
+//判队列满
+function queryFull(query){
+    console.log(dsQue);
+    return query.count===query.maxsize;
+}
+
+//进队
+function enQuery(query,value){
+	if(value===undefined || !value){
+    	console.log("请输入数值");return;
+    }
+	if(queryFull(query)){
+   		console.log("队列已满"); return;
+    }
+    query.data[query.rear++]=value;
+	
+    query.rear %=query.maxsize;
+    query.count++;
+    console.log(dsQue);
+}
+
+//出队
+function delQuery(query){
+	var cdata;
+	if(queryEmpty(query)){
+    	console.log("队已空");return;
+    }
+    cdata=query.data[query.front];
+    query.data[query.front++]=undefined;
+    query.front %=query.maxsize;
+    query.count--;
+    
+    console.log(dsQue);
+    return cdata;
+}
+
+//取队首元素
+function queryFront(query){
+	if(queryEmpty(query)){
+    	console.log("队列已空");return;    
+    }
+    console.log(dsQue.data[dsQue.front]);
+    return query.data[query.front];
+}
+</script>
+
+<br>4、链队列:<br>
+
+初始化:<input type='button' value='提交'  onclick='initStackLi(dsStaLi)'>
+<div><span>判栈空:</span>
+<input type='button' value='提交'  onclick='stackEmptyLi(dsStaLi)'>
+</div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='stackPushLi(dsStaLi,this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>退栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackPopLi(dsStaLi)'>
+</div><div><span>取栈顶元素:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackTopLi(dsStaLi)'>
+</div></div>
+
+<script>
+
+//链栈 --
+var dsStaLi={
+	top:null
+    };
+
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//初始化栈 
+function initStackLi(stack){
+    stack.top=null;
+    console.log(dsStaLi);
+}
+
+//判栈空
+function stackEmptyLi(stack){
+    return stack.top===null;
+    console.log(dsStaLi);
+}
+
+//进栈
+function stackPushLi(stack,value){
+	var newSta={data:value,next:stack.top};
+	stack.top=newSta;
+    console.log(dsStaLi);
+}
+
+//退栈
+function stackPopLi(stack){
+	var sdata;
+	if(stackEmptyLi(stack)){
+   		console.log("栈已空");return;
+    }
+    sdata=stack.top.data;
+    stack.top=stack.top.next;
+    console.log(dsStaLi);
+	return sdata;
+}
+
+//取栈顶元素
+function stackTopLi(stack){
+	if(stackEmptyLi(stack)){
+    	console.log("栈已空");return;    
+    }
+    console.log(dsStaLi.top.data);
+    return stack.top.data;
+}
+</script>
+
+</body>
+</html> 
