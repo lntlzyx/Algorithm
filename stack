@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+二、栈和队列:
+
+<br>1、顺序栈:<br>
+
+初始化:<input type='button' value='提交'  onclick='initStack(dsSta)'>
+<div><div><span>判栈空:</span>
+<input type='button' value='提交'  onclick='stackEmpty(dsSta)'>
+</div><div><span>判栈满:</span>
+<input type='button' value='提交'  onclick='stackFull(dsSta)'>
+</div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='stackPush(dsSta,this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>退栈:</span>
+<input type='button' value='提交'   onclick='stackPop(dsSta)'>
+</div><div><span>取栈顶元素:</span>
+<input type='button' value='提交'   onclick='stackTop(dsSta)'>
+</div></div>
+
+<script>
+
+//顺序栈 --
+var dsSta={
+	data:[],
+    maxsize:3,
+    top:-1
+};
+
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//初始化栈 
+function initStack(stack){
+    stack.top=-1;
+    console.log(dsSta);
+}
+
+//判栈空
+function stackEmpty(stack){
+    return stack.top===-1;
+    console.log(dsSta);
+}
+
+//判栈满
+function stackFull(stack){
+    return stack.top===stack.maxsize-1;
+    console.log(dsSta);
+}
+
+//进栈
+function stackPush(stack,value){
+	if(stackFull(stack)){
+   		console.log("栈已满"); return;
+    }
+    stack.data[++(stack.top)]=value;
+    console.log(dsSta);
+}
+
+//退栈
+function stackPop(stack){
+	if(stackEmpty(stack)){
+    console.log("栈已空");return;
+    }
+    stack.data.splice(stack.top--,1);
+    console.log(dsSta);
+}
+
+//取栈顶元素
+function stackTop(stack){
+	if(stackEmpty(stack)){
+    	console.log("栈已空");return;    
+    }
+    console.log(dsSta.data[dsSta.top]);
+    return stack.data[stack.top];
+}
+</script>
+
+<br>2、链栈:<br>
+
+初始化:<input type='button' value='提交'  onclick='initStackLi(dsStaLi)'>
+<div><span>判栈空:</span>
+<input type='button' value='提交'  onclick='stackEmptyLi(dsStaLi)'>
+</div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='stackPushLi(dsStaLi,this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>退栈:</span>
+<input type='button' value='提交'   onclick='stackPopLi(dsStaLi)'>
+</div><div><span>取栈顶元素:</span>
+<input type='button' value='提交'   onclick='stackTopLi(dsStaLi)'>
+</div></div>
+
+<script>
+
+//链栈 --
+var dsStaLi={
+	top:null
+    };
+
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//初始化栈 
+function initStackLi(stack){
+    stack.top=null;
+    console.log(dsStaLi);
+}
+
+//判栈空
+function stackEmptyLi(stack){
+    return stack.top===null;
+    console.log(dsStaLi);
+}
+
+//进栈
+function stackPushLi(stack,value){
+	var newSta={data:value,next:stack.top};
+	stack.top=newSta;
+    console.log(dsStaLi);
+}
+
+//退栈
+function stackPopLi(stack){
+	if(stackEmptyLi(stack)){
+   		console.log("栈已空");return;
+    }
+    stack.top=stack.top.next;
+    console.log(dsStaLi);
+}
+
+//取栈顶元素
+function stackTopLi(stack){
+	if(stackEmptyLi(stack)){
+    	console.log("栈已空");return;    
+    }
+    console.log(dsStaLi.top.data);
+    return stack.top.data;
+}
+</script>
+
+</body>
+</html> 
