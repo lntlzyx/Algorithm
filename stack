@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,6 +94,8 @@ function stackTop(stack){
 <input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackPopLi(dsStaLi)'>
 </div><div><span>取栈顶元素:</span><input id='fshvalue' type="text"  class='valinput'  >
 <input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackTopLi(dsStaLi)'>
+</div><div><span>数制转换:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[2].value=transNum(this.parentNode.getElementsByTagName("input")[0].value)'><input id='fshvalue' type="text"  class='valinput'  >
 </div></div>
 
 <script>
@@ -144,6 +145,28 @@ function stackTopLi(stack){
     }
     console.log(dsStaLi.top.data);
     return stack.top.data;
+}
+//利用栈做数制转换
+function transNum(invalue){
+	if(invalue===undefined || !invalue || isNaN(invalue)){
+    	console.log("请输入有效数字");return;
+    }
+    var tmp;
+    initStackLi(dsStaLi);
+    
+    //转换成16进制
+    function trans(val){
+    	if(val===0)return;
+        stackPushLi(dsStaLi,16)
+        val=parseInt(val/16);
+        trans(val);
+    }
+    trans(invalue);
+    while(!stackEmptyLi(dsStaLi)){
+    	tmp+=stackPopLi(dsStaLi);
+    }
+    return tmp;
+    console.log(dsStaLi);
 }
 </script>
 
