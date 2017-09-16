@@ -31,8 +31,20 @@ function initMulArray(iarr){
            [1,8,9,2,6],
            [3,0,2,5,1],
            [7,0,6,1,3]];
-	
-    iarr.data=p;
+           
+   var ps=[[1,5,1,3,7],
+    	   [1,0,8,0,0],
+           [1,1,9,2,6],
+           [1,1,1,5,1],
+           [1,1,1,1,3]];
+
+   var px=[[1,0,0,0,0],
+    	   [5,0,0,0,0],
+           [1,8,9,0,0],
+           [3,0,2,5,0],
+           [7,0,6,1,3]];
+
+    iarr.data=px;
 	dsOneXl=null;
     console.log("mul array is:");
     console.log(iarr);
@@ -64,6 +76,28 @@ function dealMulArray(iarr){
         	dsOneXl[max(i,j)*(max(i,j)+1)/2+min(i,j)]=iarr.data[i][j];
     
     console.log(dsOneXl);
+    
+    //n阶方阵的上三角矩阵和下三角矩阵 元素数量:(n+1)*n/2
+    //上三角:i>j时均为常数c,Aij=(n+1)*n/2,i<=j时,Aij=(n+n-i)*i/2+(j-i)
+    dsOneXl=[];
+    for(i=0,lenr=iarr.data.length;i<lenr;i++)
+    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++){
+        	if(i<=j)
+            	dsOneXl[(lenr+lenr-i)*i/2+(j-i)]=iarr.data[i][j];
+            else
+            	dsOneXl[(lenr+1)*lenr/2]=iarr.data[i][j];
+            }
+    console.log(dsOneXl);
+    //下三角:i<j时均为常数c,Aij=(n+1)*n/2;i>=j时,Aij=i*(i+1)/2+j-1
+    dsOneXl=[];
+    for(i=0,lenr=iarr.data.length;i<lenr;i++)
+    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++){
+        	if(i>=j)
+            	dsOneXl[(i+1)*i/2+j]=iarr.data[i][j];
+            else
+            	dsOneXl[(lenr+1)*lenr/2]=iarr.data[i][j];
+            }
+    console.log(dsOneXl);    
     return 'over!';
 }
 
