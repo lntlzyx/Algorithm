@@ -215,11 +215,15 @@ function danceB(){
         delQueryLi(mDancers);
         rest++;
     }
-    console.log("There are "+(len-rest*2)+" men waiting for the next round.");
-     if(!queryEmptyLi(fDancers))
+
+    if(!queryEmptyLi(fDancers)){
+   	console.log("There are "+(len-rest*2)+" women waiting for the next round.");    
      	console.log(queryFrontLi(fDancers)+" will be the first to get a partner.");
-     else
-     	console.log(queryFrontLi(mDancers)+" will be the first to get a partner.");     	
+        }
+    else{
+   	console.log("There are "+(len-rest*2)+" men waiting for the next round.");     
+     	console.log(queryFrontLi(mDancers)+" will be the first to get a partner."); 
+        }
 }
 </script>
 
