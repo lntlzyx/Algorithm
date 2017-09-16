@@ -55,12 +55,24 @@ function dealMulArray(iarr){
     console.log(iarr);
     
     //n维对称矩阵的压缩存储
-    //
-    for(i=0,lenr=iarr.data.length;i<lenr;i++){
-    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++){
-        	dsOneXl[((i>=j)?i:j)+]
+    //下标i:行,j:列  那么下三角部分:i>j,对角部分:i=j,上三角部分:i<j
+    //i和j初始0时,Aij地址=i*(i+1)/2+j,Aji=Aij=j*(j+1)/2+i;
+    //下三角、对角、上三角统一为：Aij=max(i,j)*(max(i,j)+1)/2+min(i,j)
+    dsOneXl=[];
+    for(i=0,lenr=iarr.data.length;i<lenr;i++)
+    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++)
+        	dsOneXl[max(i,j)*(max(i,j)+1)/2+min(i,j)]=iarr.data[i][j];
+    
+    console.log(dsOneXl);
     return 'over!';
 }
+
+function max(val1,val2){
+	return (val1>val2)?val1:val2;
+    }
+function min(val1,val2){
+	return (val1>val2)?val2:val1;
+    }
 </script>
 
 
