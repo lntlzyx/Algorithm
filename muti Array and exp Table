@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+三、多维数组和广义表:
+
+<br>1、多维数组:<br>
+
+初始化:<input type='button' value='提交'  onclick='initMulArray(dsMulArr)'>
+<div><div><span>操作:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=dealMulArray(dsMulArr)'>
+</div></div>
+
+<script>
+var dsMulArr={
+data:null
+};
+var dsOneXl=null;
+
+function initMulArray(iarr){
+	var p=[[1,5,1,3,7],
+    	   [5,0,8,0,0],
+           [1,8,9,2,6],
+           [3,0,2,5,1],
+           [7,0,6,1,3]];
+	
+    iarr.data=p;
+	dsOneXl=null;
+    console.log("mul array is:");
+    console.log(iarr);
+    console.log("one xl is :");
+    console.log(dsOneXl);
+}
+    
+//
+function dealMulArray(iarr){
+	//行列方式读取数据
+    console.log("mul array rows is:"+iarr.data.length);
+    console.log("mul array columns is:"+iarr.data[0].length);
+    
+    var tmp="";
+    for(var i=0,lenr=iarr.data.length;i<lenr;i++){
+    	for(var j=0,lenc=iarr.data[i].length;j<lenc;j++)
+    		tmp+=iarr.data[i][j]+((j==lenc-1)?'\n':' ');
+    }
+    console.log(tmp);
+    console.log(iarr);
+    
+    //n维对称矩阵的压缩存储
+    //
+    for(i=0,lenr=iarr.data.length;i<lenr;i++){
+    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++){
+        	dsOneXl[((i>=j)?i:j)+]
+    return 'over!';
+}
+</script>
+
+
+
+</body>
+</html> 
