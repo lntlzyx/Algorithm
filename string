@@ -83,6 +83,25 @@ console.log("replace '/you/i' to 'yyoouu':"+istr.replace(/you/gi,'yyoouu'));
     console.log(" 'Hello' and istr is :"+'Hello'.concat("::::",";;;;",istr));
     console.log(" istr and 'Hello' is :"+istr.concat('Hello'));
     
+    //charAt,charCodeAt
+    console.log("charAt 0 in string is:"+istr.charAt(0));
+    console.log("charCodeAt 0 in string is:"+istr.charCodeAt(0));
+    
+    //from string to array
+    console.log('with only one char from string to array is:');
+    console.log(istr.split(""));
+    console.log('with black on char from string to array is:');
+    console.log(istr.split(" "));
+    console.log(istr);   
+    
+    //from array to string
+    console.log('from array to string is:'+istr.split("").join(""));
+    console.log('from array to string is:'+istr.split("").join(";"));
+    
+    //string sort 
+	console.log('from array to string is:'+istr.split("").sort().join(""));
+	console.log('from array to string is:'+istr.split("").sort().reverse().join(""));  
+    
     
     return 'succ!';
 }
