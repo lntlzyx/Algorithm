@@ -1,87 +1,609 @@
-<html>
-<body>
-一、线性表<br>
-1、双链表
-<div>
-	创建:<input style='width:50px' type='button' value='提交' onclick='createXxbSlb()'>
-<div>插入:<input type='text' style='width:50px' ><input type='button' value='提交' onclick='insertXxbSlb(this.parentNode.getElementsByTagName("input")[0].value)'></div>
-<div>查找:<input style='width:50px' type='text' ><input type='button' value='提交'  onclick='findXxbSlb(this.parentNode.getElementsByTagName("input")[0].value)'></div><div>
-删除:<input type='text'style='width:50px'  ><input  type='button' value='提交'  onclick='delXxbSlb(this.parentNode.getElementsByTagName("input")[0].value)'></div>
-<script>
-var vals=['a','b','c','d','e','f','i','s'];
-var dsSlb=null,dsSlbR=null;
-	//创建双向链表
-function createXxbSlb(){
-	var p={data:null,pre:null,next:null};
-	dsSlb=p;
-	dsSlbr=p;
-	for(var i=0,l=vals.length;i<l;i++){
-		p={data:vals[i],pre:null,next:null};
-		dsSlbr.next=p;
-		p.pre=dsSlbr;
-		dsSlbr=p;
-	}
-		dsSlbr.next=dsSlb;
-		dsSlb.pre=dsSlbr;
-	console.log(dsSlb);		 
-}
-	//查找
-	function findXxbSlb(fvalue){
-		if(fvalue===undefined || !fvalue){
-			console.log("请输入数值");return;
-		}
-		var head=dsSlb;
-		while(head){
-			if(head.data && head.data===fvalue){
-					console.log("找到"+fvalue+",在");
-						console.log(head);
-					return head;
-					}
-			if(head===dsSlbr)
-				break;
-			else
-				head=head.next;
-			
-		}
-		console.log("未找到");
-		return null;		
-	}
-	//插入 尾插入
-	function insertXxbSlb(ivalue){
-		if(ivalue===undefined || !ivalue){
-			console.log("请输入数值");return;
-		}
-		var pos=findXxbSlb(ivalue);
-		if(pos){
-			console.log("数值已存在");return;
-		}
-		var p={data:ivalue,pre:dsSlbr,next:dsSlb};
-		dsSlb.pre=p;
-		dsSlbr.next=p;
-		dsSlbr=p;
-		
-		console.log(dsSlb);
-	}
-	//删除
-	function delXxbSlb(ivalue){
-		if(ivalue===undefined || !ivalue){
-			console.log("请输入数值");return;
-		}
-		var pos=findXxbSlb(ivalue);
-		if(!pos){
-			console.log("数值不存在");return;
-		}
-		pos.pre.next=pos.next;
-		
-		if(dsSlbr===pos){
-				dsSlbr=pos.pre;
-				dsSlb.pre=pos.pre;
-		}
-		else
-				pos.next.pre=pos.pre;
 
-		console.log(dsSlb);
-	}	
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+一、线性表:
+<br>
+1、顺序表:<br>
+<div><div><span>插入值:</span><input class='valinput'  id='ivalue' type="text" > 
+<input type='button' value='提交'  onclick='inXxbSxb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>查询值:</span><input id='fvalue'class='valinput'    type="text"  > 
+<input type='button' value='提交'  onclick='findXxbSxb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>删除值:</span><input id='delbvalue'class='valinput'   type="text" > 
+<input type='button' value='提交'   onclick='delXxbSxb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div></div>
+
+<script>
+var abc;
+//线性表 --顺序表
+var dsSxb={
+	data:[],
+    max:100,
+    length:0
+};
+
+//查找
+function findXxbSxb(findvalue){
+	//alert("findXxbSxb:"+findvalue);return;
+	if(findvalue===undefined || findvalue==""){
+    	console.log("请输入数值"); return -1;
+    }
+    for(var i=0,l=dsSxb.length;i<l;i++){
+    	if(dsSxb.data[i]==findvalue){
+            console.log("在空间位置:"+i); return i;
+        }
+    }
+    console.log("未找到"); return -1;    
+}
+
+//插入操作
+function inXxbSxb(value){
+    //alert("value:"+value);
+    if(value=="" || !value){
+        console.log("请输入数值"); return;
+    }
+    if(findXxbSxb(value)>=0){
+        console.log("数值已存在"); return;
+    }
+    if(dsSxb.length>=dsSxb.max){
+        console.log("空间已满");  return;
+    }
+
+    dsSxb.data[dsSxb.length++]=value;
+    console.log(dsSxb);
+}
+
+//删除操作
+function delXxbSxb(delvalue){
+ //   alert("delXxbSxb");
+    if(!delvalue || delvalue=="" ){
+        console.log("请输入数值");  return;
+    }
+    var pos=findXxbSxb(delvalue);
+    if(pos<0) {
+        console.log("数值已存在"); return;
+    }
+    for(var i=pos,l=dsSxb.length;i<l;i++){
+		dsSxb.data[i]=dsSxb.data[i+1];
+    }
+    dsSxb.data[--dsSxb.length]=undefined;
+	console.log(dsSxb);
+}
+
+
 </script>
+
+<br>2、单链表:<br>
+
+创建:<input type='button' value='头插'  onclick='createXxbDlb()'><input type='button' value='尾插'  onclick='createRXxbDlb()'><input type='button' value='尾插(头结点)'  onclick='createRHXxbDlb()'>
+<div><div><span>插入值:</span><input id='ivalue'class='valinput'   type="text" > 
+<input type='button' value='提交'  onclick='insertXxbDlb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>查询值:</span><input id='fvalue'class='valinput'   type="text"  > 
+<input type='button' value='提交'  onclick='findXxbDlb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>删除值:</span><input id='delbvalue'class='valinput'   type="text" > 
+<input type='button' value='提交'   onclick='delXxbDlb(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div></div>
+
+<script>
+
+//顺序表 --单链表
+var dsDlb,dsDlbr;
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//创建单链表 --头插法
+function createXxbDlb(){
+	var p=null;
+	dsDlb=null;
+    
+   for(var i=0,l=vals.length;i<l;i++){
+    	p={data:vals[i],next:dsDlb};    
+        dsDlb=p;
+    }
+    console.log(dsDlb);
+}
+
+//创建单链表  --尾插法
+function createRXxbDlb(){
+	var p=null;
+    dsDlb=null;
+    
+   for(var i=0,l=vals.length;i<l;i++){
+        p={data:vals[i],next:null};
+        
+        if(dsDlb==null)
+            dsDlb=p;
+        else
+         	dsDlbr.next=p;
+            
+        dsDlbr=p;
+	}
+    console.log(dsDlb);console.log(dsDlbr);
+}
+
+//创建单链表  --尾插法（带头结点）
+function createRHXxbDlb(){
+	var p={data:null,next:null};
+    dsDlb=p;
+    dsDlbr=p;
+    for(var i=0,l=vals.length;i<l;i++){
+    	p={data:vals[i],next:null};
+        dsDlbr.next=p;
+        dsDlbr=p;        
+    }
+    console.log(dsDlb);console.log(dsDlbr);
+}
+
+//查询链表  type:value,按值查找;pos,按位置查找。
+function findXxbDlb(fvalue,type){
+	if(fvalue===undefined || !fvalue){
+    	console.log("请输入数值"); return;
+    }
+    //默认按值查找
+    if(type===undefined)
+    	type='value';
+    //按值查找
+    var cdata=dsDlb;
+    var pdata=null;    
+    if(type=='value'){        
+      while(cdata){
+          if(cdata.data && cdata.data==fvalue){
+              console.log("找到"+cdata.data+",位置");console.log(cdata);
+              return {c:cdata,p:pdata};
+          }
+          pdata=cdata;
+          cdata=cdata.next;
+      }
+    }
+ //按位置查找    
+    else if(type==='pos'){
+      while(cdata){
+          if(cdata.data && cpos===fvalue){
+              //console.log("找到"+hdata.data+",位置");
+              console.log(cdata);
+              return {c:cdata,p:pdata};
+          }
+          cpos++;
+          pdata=cdata;
+          cdata=cdata.next;
+      }    
+    }
+    console.log("未找到"+fvalue);
+    return cdata;
+}
+//插入链表
+function insertXxbDlb(ivalue){
+	if(!ivalue){
+    	console.log("请输入数值"+ivalue); return;
+    }
+    //不允许重复数值
+    var pos=findXxbDlb(ivalue);
+    if(pos!=null){
+    	console.log("数值已存在"); return;
+    }
+    var newMall={data:ivalue,next:null};
+	
+	dsDlbr.next=newMall;
+    dsDlbr=newMall;
+    
+	console.log(dsDlb);
+     
+}
+//删除链表
+function delXxbDlb(dvalue){
+	if(dvalue===undefined || !dvalue){
+    	console.log("请输入数值"+dvalue);return;
+    }	
+    var pos=findXxbDlb(dvalue);
+    if(pos==null){
+    	console.log("数值不存在");return;
+    }
+
+    if(pos.c==dsDlbr)
+       dsDlbr=pos.p;    
+
+    pos.p.next=pos.c.next;  
+      	  
+    console.log(dsDlb);
+    console.log(dsDlbr);
+}
+
+
+</script>
+
+
+<br>3、单链表(循环):<br>
+
+创建:<input type='button' value='尾插'  onclick='createRXxbDlbXh()'><input type='button' value='尾插(头结点)'  onclick='createRHXxbDlbXh()'>
+<div><div><span>插入值:</span><input id='ivalue'class='valinput'   type="text" > 
+<input type='button' value='提交'  onclick='insertXxbDlbXh(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>查询值:</span><input id='fvalue'class='valinput'   type="text"  > 
+<input type='button' value='提交'  onclick='findXxbDlbXh(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div><div><span>删除值:</span><input id='delbvalue'class='valinput'   type="text" > 
+<input type='button' value='提交'   onclick='delXxbDlbXh(this.parentNode.getElementsByTagName("input")[0].value)'>
+</div></div>
+
+<script>
+
+//顺序表 --单链表
+var dsDlb,dsDlbr;
+var vals=['a','b','c','d','e','f','s','i'];
+    
+//创建单链表  --尾插法
+function createRXxbDlbXh(){
+	var p=null;
+    dsDlb=null;
+    
+   for(var i=0,l=vals.length;i<l;i++){
+        p={data:vals[i],next:null};
+        
+        if(dsDlb==null)
+            dsDlb=p;
+        else
+         	dsDlbr.next=p;
+            
+        dsDlbr=p;
+	}
+    dsDlbr.next=dsDlb;
+    console.log(dsDlb);
+    console.log(dsDlbr);
+}
+
+//创建单链表  --尾插法（带头结点）
+function createRHXxbDlbXh(){
+	var p={data:null,next:null};
+    dsDlb=p;
+    dsDlbr=p;
+    for(var i=0,l=vals.length;i<l;i++){
+    	p={data:vals[i],next:null};
+        dsDlbr.next=p;
+        dsDlbr=p;        
+    }
+    dsDlbr.next=dsDlb;
+    console.log(dsDlb);console.log(dsDlbr);
+}
+
+//查询链表  type:value,按值查找;pos,按位置查找。
+function findXxbDlbXh(fvalue,type){
+	if(fvalue===undefined || !fvalue){
+    	console.log("请输入数值"); return;
+    }
+    //默认按值查找
+    if(type===undefined)
+    	type='value';
+    //按值查找
+    var cdata=dsDlb;
+    var pdata=null;    
+    if(type=='value'){        
+      while(cdata){
+          if(cdata.data && cdata.data==fvalue){
+              console.log("找到"+cdata.data+",位置");console.log(cdata);
+              return {c:cdata,p:pdata};
+          }
+          if(pdata==dsDlbr) return;
+          pdata=cdata;
+          cdata=cdata.next;
+      }
+    }
+ //按位置查找    
+    else if(type==='pos'){
+      while(cdata){
+          if(cdata.data && cpos===fvalue){
+              //console.log("找到"+hdata.data+",位置");
+              console.log(cdata);
+              return {c:cdata,p:pdata};
+          }
+          if(pdata==dsDlbr) return;
+          cpos++;
+          pdata=cdata;
+          cdata=cdata.next;
+      }    
+    }
+    console.log("未找到"+fvalue);
+    return null;
+}
+//插入链表
+function insertXxbDlbXh(ivalue){
+	if(ivalue===undefined || !ivalue){
+    	console.log("请输入数值"+ivalue); return;
+    }
+    //不允许重复数值
+    var pos=findXxbDlbXh(ivalue);
+    if(pos!=null){
+    	console.log("数值已存在"); return;
+    }
+    var newMall={data:ivalue,next:dsDlb};
+	
+	dsDlbr.next=newMall;
+    dsDlbr=newMall;
+    
+	console.log(dsDlb);
+    console.log(dsDlbr);  
+}
+//删除链表
+function delXxbDlbXh(dvalue){
+	if(dvalue===undefined || !dvalue){
+    	console.log("请输入数值"+dvalue);return;
+    }	
+    var pos=findXxbDlb(dvalue);
+    if(pos==null){
+    	console.log("数值不存在");return;
+    }
+
+    if(pos.c==dsDlbr){
+       dsDlbr=pos.p;    
+	   dsDlbr.next=dsDlb;
+    }
+    pos.p.next=pos.c.next;  
+      	  
+    console.log(dsDlb);
+    console.log(dsDlbr);
+}
+
+
+</script>
+
+
+<br>4、双链表<br>
+创建:<input type='button' value='提交'   onclick='createRXxbSlb()'>
+<br>
+
+插入值:<input id='insvalue' type="text" value=""class='valinput'   > <input type='button' value='提交'   onclick='insertXxbSlb(document.getElementById("insvalue").value)'>
+<br>
+查询值:<input id='fsvalue' type="text" value=""class='valinput'   > <input type='button' value='提交'  onclick='findXxbSlb(document.getElementById("fsvalue").value)'>
+<br>
+删除值:<input id='delsvalue' type="text" value="" class='valinput'  > <input type='button' value='提交'   onclick='delXxbSlb(document.getElementById("delsvalue").value)'>
+
+<script>
+/////////////////////////////////////////
+//顺序表 --双链表
+/////////////////////////////////////////
+
+var dsSlb={
+	h:null,
+    r:null
+};
+
+var vals=['a','b','c','d','e','f','i','s'];
+    
+//创建双链表 --头插法
+function createXxbSlb(){
+	var p=null;
+	dsSlb.h=null;
+    dsSlb.r=null;
+    
+   for(var i=0,l=vals.length;i<l;i++)
+    {
+    	p={data:null,pre:null,next:null};    
+    	p.data=vals[i];
+        p.next=dsSlb.h;
+        
+        if(dsSlb.h==null)
+         	dsSlb.r=p;
+        
+        p.pre=dsSlb.h;
+        dsSlb.h=p;
+    }
+    console.log(dsDlb);
+}
+
+//创建双链表  --尾插法
+function createRXxbSlb(){
+    var vals2=['a'];
+	var p=null;
+    
+    dsSlb.h=null;
+    dsSlb.r=null;
+    
+   for(var i=0,l=vals.length;i<l;i++)
+    {
+        p={data:vals[i],pre:null,next:null};
+        
+        if(dsSlb.h==null)
+            dsSlb.h=p;
+       
+        if(dsSlb.r!=null)
+         	dsSlb.r.next=p;
+          
+        p.pre=dsSlb.r; 
+        dsSlb.r=p;
+	}
+        
+    console.log(dsSlb);
+}
+
+
+//查询链表
+function findXxbSlb(fvalue){
+	if(!fvalue)
+    {
+    	alert("请输入数值:"+fvalue);
+        return;
+    }
+    var hdata=dsSlb.h;
+    
+    while(hdata)
+    {
+    	if(hdata.data && hdata.data==fvalue)
+        	return hdata;
+
+       	hdata=hdata.next;
+    }
+
+    return hdata;
+}
+
+//插入链表
+function insertXxbSlb(ivalue){
+	if(!ivalue)
+    {
+    	alert("请输入数值"+ivalue);
+        return;
+    }
+    //不允许重复数值
+    var pos=findXxbSlb(ivalue);
+    if(pos!=null)
+    {
+    	alert("数值已存在");
+        return;
+    }
+    var newMall={data:ivalue,pre:null,next:null};
+
+    if(dsSlb.h==null)
+    	dsSlb.h=newMall;
+
+    if(dsSlb.r!=null)
+    	dsSlb.r.next=newMall;
+    
+     newMall.pre=dsSlb.r;   
+     dsSlb.r=newMall;
+        
+    console.log(dsSlb);
+     
+}
+
+//删除链表
+function delXxbSlb(dvalue){
+	if(!dvalue)
+    {
+    	alert("请输入数值"+dvalue);
+        return;
+    }	
+    var pos=findXxbSlb(dvalue);
+    if(pos==null)
+    {
+    	alert("数值不存在");
+        return;
+    }
+    
+    console.log(pos); 
+    
+    if(pos.pre!=null)
+		pos.pre.next=pos.next;
+    else
+    	dsSlb.h=pos.next;
+        
+    if(pos.next!=null)
+  	  	pos.next.pre=pos.pre;
+    else
+    	dsSlb.r=pos.pre;
+      	  
+    console.log(dsSlb);
+}
+</script>
+
+
+<br>5、双链表(循环)<br>
+创建(带头结点):<input type='button' value='提交'   onclick='createRXxbSlbXh()'>
+<br>
+
+插入值:<input id='inshvalue' type="text" value="" class='valinput'  > <input type='button' value='提交'   onclick='insertXxbSlbXh(document.getElementById("inshvalue").value)'>
+<br>
+查询值:<input id='fshvalue' type="text" value="" class='valinput'  > <input type='button' value='提交'  onclick='findXxbSlbXh(document.getElementById("fshvalue").value)'>
+<br>
+删除值:<input id='delshvalue' type="text" value="" class='valinput'  > <input type='button' value='提交'   onclick='delXxbSlbXh(document.getElementById("delshvalue").value)'>
+
+<script>
+/////////////////////////////////////////
+//顺序表 --双链表(带头结点)
+/////////////////////////////////////////
+
+var dsSlb,dsSlbr;
+
+var vals=['a','b','c','d','e','f','i','s'];
+    
+//创建双链表  --尾插法
+function createRXxbSlbXh(){
+    var vals2=['a'];
+	var p={data:null,pre:null,next:null};
+    
+    dsSlb=p;
+    dsSlbr=p;
+    
+   for(var i=0,l=vals.length;i<l;i++) {
+        p={data:vals[i],pre:dsSlbr,next:dsSlb};
+        dsSlbr.next=p;
+        dsSlb.pre=p;
+        dsSlbr=p;
+	}
+        
+    console.log(dsSlb);
+    console.log(dsSlbr);
+}
+
+
+//查询链表
+function findXxbSlbXh(fvalue){
+	if(fvalue===undefined || !fvalue){
+    	console.log("请输入数值:"+fvalue);
+        return;
+    }
+    var cdata=dsSlb;
+    
+    while(cdata){
+    	if(cdata.data && cdata.data==fvalue){
+        	console.log("找到:"+fvalue+",位置:");
+            console.log(cdata);
+            return cdata;
+            }
+		if(cdata==dsSlbr)
+          return;
+       	else 
+          cdata=cdata.next;
+    }
+	console.log("未找到:"+fvalue);
+    return null;
+}
+
+//插入链表
+function insertXxbSlbXh(ivalue){
+	if(ivalue===undefined || !ivalue){
+    	console.log("请输入数值"+ivalue);
+        return;
+    }
+    //不允许重复数值
+    var pos=findXxbSlbXh(ivalue);
+    if(pos!=null){
+    	console.log("数值已存在");
+        return;
+    }
+    var newMall={data:ivalue,pre:dsSlbr,next:dsSlb};
+	dsSlbr.next=newMall;
+    dsSlb.pre=newMall;
+    dsSlbr=newMall;
+    
+    console.log(dsSlb);
+    console.log(dsSlbr);     
+}
+
+//删除链表
+function delXxbSlbXh(dvalue){
+	if(!dvalue) {
+    	console.log("请输入数值"+dvalue);
+        return;
+    }	
+    var pos=findXxbSlbXh(dvalue);
+    if(pos==null){
+    	console.log("数值不存在");
+        return;
+    }
+	if(pos==dsSlbr)
+    	dsSlbr=pos.pre;
+        
+   	pos.pre.next=pos.next;
+    pos.next.pre=pos.pre;
+    
+    console.log(dsSlb);
+    console.log(dsSlbr);    
+}
+</script>
+
 </body>
-</html>
+</html> 
