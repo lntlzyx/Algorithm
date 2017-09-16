@@ -23,7 +23,12 @@ width:30px;
 var dsMulArr={
 data:null
 };
-var dsOneXl=null;
+var dsOneXl=null; //一元向量
+var dsOneSyz=null;//三元组 i,j,data
+var dsOneSyzTra=null;//转置后的三元组 i,j,data
+var dsMulArrTra={
+data:null
+};
 
 function initMulArray(iarr){
 	var p=[[1,5,1,3,7],
@@ -50,7 +55,12 @@ function initMulArray(iarr){
            [-6,0,0,0,0]];
            
     iarr.data=pxs;
-	dsOneXl=null;
+    dsMulArrTra.data=null;
+    
+	dsOneXl=[];
+    dsOneSyz=[];
+    dsOneSyzTra=[];
+    
     console.log("mul array is:");
     console.log(iarr);
     console.log("one xl is :");
@@ -104,9 +114,68 @@ function dealMulArray(iarr){
             }
     console.log(dsOneXl);   
     
-    
+    console.log(iarr);
     //稀疏矩阵
+    var cpos=0;
+    var nsyz=[];
+    for(i=0,lenr=iarr.data.length;i<lenr;i++)
+    	for(j=0,lenc=iarr.data[i].length;j<lenc;j++)
+        	if(iarr.data[i][j]!==0){
+            	nsyz=[i,j,iarr.data[i][j]];
+            	dsOneSyz[cpos++]=nsyz;
+                }
+    //dsOneSyz[dsOneSyz.length]=[12,10,-100];
+    console.log("dsOneSyz:");
+    console.log(dsOneSyz);
+    console.log(dsOneSyz[0][0]);
+    //转置
+	var tmpp=[];
+    var tmp2=[];
+    var traed=[];
+    var tmpdd=0;
+    for(i=0,lenr=dsOneSyz.length;i<lenr;i++){
+    	tmpdd=dsOneSyz[i][1];
+    	for(j=0,lenc=dsOneSyz.length;j<lenc;j++){
+        	if(tmp2.length>0){
+            	for(var z=0,lent=tmp2.length;z<lent;z++){
+                	if(dsOneSyz[j][0]===tmp2[z][0] &&
+                         dsOneSyz[j][1]===tmp2[z][1])
+                      break;
+                    else{
+				if(dsOneSyz[j][1]<tmpdd){
+                	tmpdd=dsOneSyz[j][1];
+                    tmpp=[dsOneSyz[j][0],dsOneSyz[j][1],dsOneSyz[j][2]];
+                }                 	
+                    }
+            	}
+                
+                }
+            else
+				if(dsOneSyz[j][1]<tmpdd){
+                	tmpdd=dsOneSyz[j][1];
+                    tmpp=[dsOneSyz[j][0],dsOneSyz[j][1],dsOneSyz[j][2]];
+                }              	
+
+        }
+        tmp2[i]=tmpp; 
+    }
+    dsOneSyzTra.data=tmp2;
+    console.log("tra:");
+    console.log(dsOneSyzTra);
     
+    dsMulArrTra.data=[];
+    var tmpj;
+    for(i=0;i<lenc;i++){
+    	tmpj=[];
+    	for(j=0;j<lenr;j++)
+           tmpj[j]=0;
+        dsMulArrTra.data[i]=tmpj;
+        }
+     console.log(dsMulArrTra.data);         
+    for(i=0,lenr=dsOneSyz.length;i<lenr;i++)
+    	dsMulArrTra.data[dsOneSyz[i][1]][dsOneSyz[i][0]]=dsOneSyz[i][2];
+
+    console.log(dsMulArrTra.data);    
     return 'over!';
 }
 
