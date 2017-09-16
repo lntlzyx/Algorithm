@@ -110,6 +110,8 @@ function queryFront(query){
 <input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=delQueryLi(dsQueLi)'>
 </div><div><span>取队首元素:</span><input id='fshvalue' type="text"  class='valinput'  >
 <input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=queryFrontLi(dsQueLi)'>
+</div><div><span>舞伴问题:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=danceB()'>
 </div></div>
 
 <script>
@@ -174,6 +176,27 @@ function queryFrontLi(query){
     }
     console.log(dsQueLi.front.data);
     return query.front.data;
+}
+
+//舞伴问题
+function danceB(){
+	var persons=[
+    		{sex:'m',name:'George Thompson'},
+            {sex:'f',name:'Jane Andrews'},
+            {sex:'f',name:'Sandra Williams'},
+            {sex:'m',name:'Bill Brooks'},
+            {sex:'m',name:'Bob Carlson'},
+            {sex:'f',name:'Shirley Granley'},
+            {sex:'f',name:'Louise Sanderson'},
+            {sex:'m',name:'Dae Evans'},
+            {sex:'m',name:'Harold Brown'},
+            {sex:'f',name:'Roberta Edwards'},
+            {sex:'m',name:'Dan Gromley'},
+            {sex:'m',name:'John Gaston'}
+            ];
+    var fDancers=null,mDancers=null;
+    
+    
 }
 </script>
 
