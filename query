@@ -126,18 +126,18 @@ var dsQueLi={
 function initQueryLi(query){
     query.front=null;
     query.rear=null;
-    console.log(dsQueLi);
+   // console.log(dsQueLi);
 }
 
 //判队列空
 function queryEmptyLi(query){
-    console.log(dsQueLi);
+   // console.log(query);
     return query.front===null;
 }
 
 //进队
 function enQueryLi(query,value){
-	if(value===undefined || !value){
+	if(value===undefined || value==""){
     	console.log("请输入数值");return;
     }
 	var p={data:value,next:null};
@@ -149,7 +149,7 @@ function enQueryLi(query,value){
         
     query.rear=p;
 
-    console.log(dsQueLi);
+   // console.log(query);
 }
 
 //出队
@@ -165,7 +165,7 @@ function delQueryLi(query){
         
     query.front=query.front.next;
 
-    console.log(dsQueLi);
+   // console.log(query);
     return cdata;
 }
 
@@ -174,7 +174,7 @@ function queryFrontLi(query){
 	if(queryEmptyLi(query)){
     	console.log("队列已空");return;    
     }
-    console.log(dsQueLi.front.data);
+    //console.log(query.front.data);
     return query.front.data;
 }
 
@@ -194,9 +194,32 @@ function danceB(){
             {sex:'m',name:'Dan Gromley'},
             {sex:'m',name:'John Gaston'}
             ];
-    var fDancers=null,mDancers=null;
+    var fDancers={front:null,rear:null};
+    var mDancers={front:null,rear:null};
+    var rest=0;
     
-    
+    initQueryLi(fDancers);
+    initQueryLi(mDancers);
+    console.log(persons);
+    for(var i=0,len=persons.length;i<len;i++){
+    	if(persons[i].sex==='f')
+        	enQueryLi(fDancers,persons[i].name);
+        else
+        	enQueryLi(mDancers,persons[i].name);        	
+    }
+
+    console.log("The Danceing partners are:");
+    while(!queryEmptyLi(fDancers) && !queryEmptyLi(mDancers)){
+    	console.log(fDancers.front.data+"  "+mDancers.front.data);
+        delQueryLi(fDancers);
+        delQueryLi(mDancers);
+        rest++;
+    }
+    console.log("There are "+(len-rest*2)+" men waiting for the next round.");
+     if(!queryEmptyLi(fDancers))
+     	console.log(queryFrontLi(fDancers)+" will be the first to get a partner.");
+     else
+     	console.log(queryFrontLi(mDancers)+" will be the first to get a partner.");     	
 }
 </script>
 
