@@ -47,7 +47,30 @@ function dealStr(istr){
     //串第一次出现位置 str.search(findstr) 不支持第二个参数 findstr可以正则表达式
     console.log("The first position of string 'you' in str is :"+istr.search("you"));    
   
-  
+    //取子串
+    //There are 3 methods for extracting a part of a string:
+    //slice(start,end)
+    //substring(start,end)
+    //substr(start,length)
+    
+    //slice() extracts a part of a string and returns the extracted part in a new string.
+    console.log("The part extract string from pos 10 to 30 is:"+istr.slice(10,30));
+    console.log("The part extract string from pos -30 to -10 is:"+istr.slice(-30,-10));   
+    console.log("The part extract string from pos 10 to end is:"+istr.slice(10));  
+    console.log("The part extract string from pos -5 to end is:"+istr.slice(-5));     
+    //console.log(istr);
+    
+    //substring cannot accept negative indexes.
+    console.log("The part extract string from pos 10 to 30 is:"+istr.substring(10,30));
+    console.log("The part extract string from pos 10 to end is:"+istr.substring(10));    
+    //console.log(istr);
+    
+    //substr
+    console.log("The part extract string from pos 10 to 30 is:"+istr.substr(10,20));
+    console.log("The part extract string from pos 10 to end is:"+istr.substr(10));
+    console.log("The part extract string from pos -10 to end is:"+istr.substr(-10));
+    console.log("The part extract string from pos -30 to -10 is:"+istr.substr(-30,20));
+    
     
     return 'succ!';
 }
