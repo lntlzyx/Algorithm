@@ -14,27 +14,19 @@ width:30px;
 
 <br>1、串操作:<br>
 
-初始化:<input type='button' value='提交'  onclick='initString(dsStr)'>
-<div><div><span>串长:</span><input id='fshvalue' type="text"  class='valinput'  >
-<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=lengthStr(dsStr)'>
-</div><div><span>查串:</span><input id='fshvalue' type="text"  class='valinput'  >
-<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=findStr(dsStr)'>
-</div><div><span>串操作:</span><input id='fshvalue' type="text"  class='valinput'  >
+初始化:<input type='button' value='提交'  onclick='initString()'>
+<div><div><span>串操作:</span><input id='fshvalue' type="text"  class='valinput'  >
 <input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=dealStr(dsStr)'>
 </div></div>
 
 <script>
-var dsStr="You’ve tried crunching baseball stats. You’ve mentally replayed your last round of golf. You’ve outlined the steps to making your favorite sandwich. But the more you try to last longer in bed, the faster you finish—and you’re not alone.";
+var dsStr="";
 
-function lengthStr(istr){
-	console.log(istr.length);
-    }
+function initString(){
+	dsStr="You’ve tried crunching baseball stats. You’ve mentally replayed your last round of golf. You’ve outlined the steps to making your favorite sandwich. But the more you try to last longer in bed, the faster you finish—and you’re not alone.";
+   // console.log(dsStr);
+}
 
-function findStr(istr){
-	console.log(istr.indexOf("bed"));
-    
-    return istr.indexOf("bed");
-    }
 function dealStr(istr){
 	//串长
     console.log("string length is :"+istr.length);
@@ -70,6 +62,26 @@ function dealStr(istr){
     console.log("The part extract string from pos 10 to end is:"+istr.substr(10));
     console.log("The part extract string from pos -10 to end is:"+istr.substr(-10));
     console.log("The part extract string from pos -30 to -10 is:"+istr.substr(-30,20));
+    
+    //replace
+    console.log("replace 'you' to 'yyoouu':"+istr.replace('you','yyoouu'));
+console.log("replace 'you' to 'yyoouu':"+istr.replace(/you/g,'yyoouu'));
+console.log("replace 'YOU' to 'yyoouu':"+istr.replace(/YOU/g,'yyoouu'));    
+console.log("replace '/you/i' to 'yyoouu':"+istr.replace(/you/gi,'yyoouu'));    
+     
+    //console.log(istr);
+    
+    //upper
+    console.log("upper is:"+istr.toUpperCase());
+    console.log(istr);
+    istr=istr.toUpperCase();
+    console.log(istr);
+    console.log("lower is:"+istr.toLowerCase());
+    console.log(istr);
+    
+    //concat
+    console.log(" 'Hello' and istr is :"+'Hello'.concat("::::",";;;;",istr));
+    console.log(" istr and 'Hello' is :"+istr.concat('Hello'));
     
     
     return 'succ!';
