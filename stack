@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,10 +21,10 @@ width:30px;
 <input type='button' value='提交'  onclick='stackFull(dsSta)'>
 </div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
 <input type='button' value='提交'   onclick='stackPush(dsSta,this.parentNode.getElementsByTagName("input")[0].value)'>
-</div><div><span>退栈:</span>
-<input type='button' value='提交'   onclick='stackPop(dsSta)'>
-</div><div><span>取栈顶元素:</span>
-<input type='button' value='提交'   onclick='stackTop(dsSta)'>
+</div><div><span>退栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackPop(dsSta)'>
+</div><div><span>取栈顶元素:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackTop(dsSta)'>
 </div></div>
 
 <script>
@@ -69,7 +70,7 @@ function stackPop(stack){
 	if(stackEmpty(stack)){
     console.log("栈已空");return;
     }
-    stack.data.splice(stack.top--,1);
+    return stack.data.splice(stack.top--,1);
     console.log(dsSta);
 }
 
@@ -90,10 +91,10 @@ function stackTop(stack){
 <input type='button' value='提交'  onclick='stackEmptyLi(dsStaLi)'>
 </div><div><span>进栈:</span><input id='fshvalue' type="text"  class='valinput'  >
 <input type='button' value='提交'   onclick='stackPushLi(dsStaLi,this.parentNode.getElementsByTagName("input")[0].value)'>
-</div><div><span>退栈:</span>
-<input type='button' value='提交'   onclick='stackPopLi(dsStaLi)'>
-</div><div><span>取栈顶元素:</span>
-<input type='button' value='提交'   onclick='stackTopLi(dsStaLi)'>
+</div><div><span>退栈:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackPopLi(dsStaLi)'>
+</div><div><span>取栈顶元素:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=stackTopLi(dsStaLi)'>
 </div></div>
 
 <script>
@@ -126,11 +127,14 @@ function stackPushLi(stack,value){
 
 //退栈
 function stackPopLi(stack){
+	var sdata;
 	if(stackEmptyLi(stack)){
    		console.log("栈已空");return;
     }
+    sdata=stack.top.data;
     stack.top=stack.top.next;
-    console.log(dsStaLi);
+    console.log(dsStaLi);    
+    return sdata;
 }
 
 //取栈顶元素
