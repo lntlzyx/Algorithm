@@ -155,10 +155,14 @@ function transNum(invalue){
 	if(invalue===undefined || !invalue || isNaN(invalue)){
     	console.log("请输入有效数字");return;
     }
-    var tmp="";
+    var tmp;
     initStackLi(dsStaLi);
-    trans(invalue,2);
     
+    while(invalue){
+    	stackPushLi(dsStaLi,invalue%2);
+        invalue=parseInt(invalue/2);
+    }
+    tmp="";
     while(!stackEmptyLi(dsStaLi)){
     	tmp=tmp+stackPopLi(dsStaLi);
     }
@@ -167,12 +171,6 @@ function transNum(invalue){
     return parseInt(tmp);
 }
 
-  //转换
-  function trans(val,jz){
-    if(val===0)return;
-    stackPushLi(dsStaLi,val%jz)
-    trans(parseInt(val/jz),jz);
-  }
 
 </script>
 
