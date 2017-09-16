@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+三、串:
+
+<br>1、串操作:<br>
+
+初始化:<input type='button' value='提交'  onclick='initString(dsStr)'>
+<div><div><span>串长:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=lengthStr(dsStr)'>
+</div><div><span>查串:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=findStr(dsStr)'>
+</div><div><span>串操作:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=dealStr(dsStr)'>
+</div></div>
+
+<script>
+var dsStr="You’ve tried crunching baseball stats. You’ve mentally replayed your last round of golf. You’ve outlined the steps to making your favorite sandwich. But the more you try to last longer in bed, the faster you finish—and you’re not alone.";
+
+function lengthStr(istr){
+	console.log(istr.length);
+    }
+
+function findStr(istr){
+	console.log(istr.indexOf("bed"));
+    
+    return istr.indexOf("bed");
+    }
+function dealStr(istr){
+	//串长
+    console.log("string length is :"+istr.length);
+    //串第一次出现位置 str.indexOf(findstr)
+    console.log("The first position of string 'you' in str is :"+istr.indexOf("you"));
+    //串第65位之后第一次出现位置 str.indexOf(findstr,startpos)
+    console.log("The first position of string 'you' in str from 65 pos is :"+istr.indexOf("you",65));    
+    //串最后出现位置 str.lastIndexOf(findstr)
+    console.log("The last position of string 'you' in str is :"+istr.lastIndexOf("you"));    
+    //串第一次出现位置 str.search(findstr) 不支持第二个参数 findstr可以正则表达式
+    console.log("The first position of string 'you' in str is :"+istr.search("you"));    
+  
+  
+    
+    return 'succ!';
+}
+</script>
+
+
+
+</body>
+</html> 
