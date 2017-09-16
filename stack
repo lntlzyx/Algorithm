@@ -166,11 +166,17 @@ function transNum(invalue){
     while(!stackEmptyLi(dsStaLi)){
     	tmp=tmp+stackPopLi(dsStaLi);
     }
-
+   
     console.log(dsStaLi);
-    return parseInt(tmp);
+    return tmp;//proN(100);
 }
 
+//递归
+function proN(nval){
+	if(nval===0)return 1;
+    else
+      return nval*proN(nval-1);
+}
 
 </script>
 
