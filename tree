@@ -27,7 +27,11 @@ var dsTree={
     rc:null  //右孩子
 };
 
-
+var dsT={
+	pTree:{}
+};
+    var preData1=['a','b','d',null,null,'e',null,null,'c',null,'f','g',null,null];
+    var pos1=0;
 //初始化
 function initTree(itree){
 	//初始数据
@@ -44,7 +48,7 @@ function initTree(itree){
     var initData=['a','ab','ac','bd','be','cf','cg',null,null,null,'eh','fi',null,'gj','gk'];
     
     var preData=['a','b','d',null,null,'e',null,null,'c',null,null];
-    var pTree=null;
+    var pTree={};
     
     for(var i=0,len=initData.length;i<len;i++){
       tmp={data:initData[i],lc:null,rc:null};
@@ -57,13 +61,14 @@ function initTree(itree){
     itree=root[0];
     
     //创建二叉树 先序遍历 
-	creatrTree(pTree,preData,0);
+	createTree(pTree);
     
-	console.log(ttree);
+    console.log('pTree:');
+	console.log(pTree);
     
     //前序遍历（前根遍历）
     console.log("pre:");
-    preRoot(ttree);  
+    preRoot(pTree);  
     //中序遍历（中根遍历）
     console.log("middle:");
     midRoot(ttree); 
@@ -73,12 +78,18 @@ function initTree(itree){
 }
 
 //创建二叉树链表 (基于前序遍历)
-function createTree(itree,predata,pos){
-	if(pos==predata.length) return;
+function createTree(itree){
+	if(itree===null) return;
+
+    itree.data=preData1[pos1];
     
-    itree={data:predata[pos],lc:null,rc:null};
-    createTree(itree.lc,predata,pos+1);
-    createTree(itree.rc,predata,pos+1);
+    pos1++;
+    itree.lc=((preData1[pos1]==null)?null:{});
+    createTree(itree.lc,preData1,pos1);
+    
+    pos1++;
+    itree.rc=((preData1[pos1]==null)?null:{});
+    createTree(itree.rc,preData1,pos1);
 }
 
 //前序遍历NLR（前根遍历）
