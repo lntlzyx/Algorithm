@@ -40,9 +40,11 @@ function initTree(itree){
     //root=itree;
     var ttree={
            data:'a',
-           lc:{data:'b',lc:{data:'d',lc:null,rc:null},
-                        rc:{data:'e',lc:null,rc:null}},
-           rc:{data:'c',lc:null,rc:null}
+           ltag:0,
+           lc:{data:'b',lc:{data:'d',ltag:0,lc:null,rtag:0,rc:null},
+                        rc:{data:'e',ltag:0,lc:null,rtag:0,rc:null}},
+           rtag:0,
+           rc:{data:'c',ltag:0,lc:null,rtag:0,rc:null}
            };
            
     var initData=['a','ab','ac','bd','be','cf','cg',null,null,null,'eh','fi',null,'gj','gk'];
@@ -68,13 +70,20 @@ function initTree(itree){
     
     //前序遍历（前根遍历）
     console.log("pre:");
-    preRoot(pTree);  
+    preRoot(ttree);  
     //中序遍历（中根遍历）
     console.log("middle:");
     midRoot(ttree); 
     //后序遍历（后根遍历）
     console.log("rear:");
-    reaRoot(ttree);    
+    reaRoot(ttree); 
+    
+    //线索二叉树
+    console.log("thead:");
+    console.log(ttree);
+    theadTree(ttree,null);
+    console.log("theaded:");
+    console.log(ttree);    
 }
 
 //创建二叉树链表 (基于前序遍历)
@@ -118,6 +127,22 @@ function reaRoot(itree){
     reaRoot(itree.rc);
     console.log(itree.data);    
 }
+
+//线索二叉树
+function theadTree(itree,ptree){
+	if(itree===null) return;
+
+    theadTree(itree.lc,itree);
+	if(itree.lc==null){
+   //console.log(ptree);
+        itree.ltag=1;
+    }
+    if(itree.rc==null){
+    	itree.rtag=1;
+    }
+    theadTree(itree.rc,itree);
+}
+
 </script>
 
 
