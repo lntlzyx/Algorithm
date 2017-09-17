@@ -1,0 +1,75 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+input.valinput {
+width:30px;
+}
+</style>
+
+</head>
+<body>
+四、树:
+
+<br>1、二叉树:<br>
+
+初始化:<input type='button' value='提交'  onclick='initTree(dsTree)'>
+<div><div><span>操作:</span><input id='fshvalue' type="text"  class='valinput'  >
+<input type='button' value='提交'   onclick='this.parentNode.getElementsByTagName("input")[0].value=dealMulArray(dsMulArr)'>
+</div></div>
+
+<script>
+//存储结构 --二叉树
+var dsTree={
+	data:null,//数据
+    lc:null,  //左孩子
+    rc:null  //右孩子
+};
+
+
+//初始化
+function initTree(itree){
+	//初始数据
+    var tmp;
+	var root=[];
+    //root=itree;
+    var ttree={
+           data:'a',
+           lc:{data:'b',lc:null,rc:null},
+           rc:{data:'c',lc:null,rc:null}
+           };
+           
+    var initData=['a','ab','ac','bd','be','cf','cg',null,null,null,'eh','fi',null,'gj','gk'];
+    
+    for(var i=0,len=initData.length;i<len;i++){
+      tmp={data:initData[i],lc:null,rc:null};
+      root[i]=tmp;
+	}
+    for(i=0,len=Math.floor(root.length/2);i<len;i++){
+    	root[i].lc=((root[2*i+1].data===null)?null:root[2*i+1]);
+        root[i].rc=((root[2*i+2].data===null)?null:root[2*i+2]);
+    }
+    itree=root[0];
+    
+	console.log(ttree);
+    
+    //前序遍历（前根遍历）
+    preRoot(itree);    
+}
+
+//前序遍历NLR（前根遍历）
+function preRoot(itree){
+	if(itree===null) return;
+    console.log(itree.data);
+    
+    preRoot(itree.lc);
+    preRoot(itree.rc);
+}
+</script>
+
+
+
+</body>
+</html> 
+
