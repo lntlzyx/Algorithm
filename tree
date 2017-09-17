@@ -36,11 +36,14 @@ function initTree(itree){
     //root=itree;
     var ttree={
            data:'a',
-           lc:{data:'b',lc:null,rc:null},
+           lc:{data:'b',lc:{data:'d',lc:null,rc:null},
+                        rc:{data:'e',lc:null,rc:null}},
            rc:{data:'c',lc:null,rc:null}
            };
            
     var initData=['a','ab','ac','bd','be','cf','cg',null,null,null,'eh','fi',null,'gj','gk'];
+    
+    var preData=['a','b','d',null,null,'e',null,null,'c',null,null];
     
     for(var i=0,len=initData.length;i<len;i++){
       tmp={data:initData[i],lc:null,rc:null};
@@ -52,10 +55,20 @@ function initTree(itree){
     }
     itree=root[0];
     
+    //创建二叉树 先序遍历 
+    
+    
 	console.log(ttree);
     
     //前序遍历（前根遍历）
-    preRoot(itree);    
+    console.log("pre:");
+    preRoot(ttree);  
+    //中序遍历（中根遍历）
+    console.log("middle:");
+    midRoot(ttree); 
+    //后序遍历（后根遍历）
+    console.log("rear:");
+    reaRoot(ttree);    
 }
 
 //前序遍历NLR（前根遍历）
@@ -65,6 +78,24 @@ function preRoot(itree){
     
     preRoot(itree.lc);
     preRoot(itree.rc);
+}
+
+//中序遍历LNR（中根遍历）
+function midRoot(itree){
+	if(itree===null) return;
+
+    midRoot(itree.lc);
+    console.log(itree.data);    
+    midRoot(itree.rc);
+}
+
+//后序遍历LRN（后根遍历）
+function reaRoot(itree){
+	if(itree===null) return;
+
+    reaRoot(itree.lc);
+    reaRoot(itree.rc);
+    console.log(itree.data);    
 }
 </script>
 
