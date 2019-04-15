@@ -1,0 +1,61 @@
+//背包、队列、栈
+//API
+/**
+ * 队列--先进先出
+ * public class Queue<Item> implements Iterable<Item>
+ *              Queue()           创建一个空队列
+ *         void enqueue(Item item)  入队：添加一个元素
+ *         Item dequeue()  出队：删除最早添加的元素
+ *      boolean isEmpty()       队列是否为空
+ *          int size()          队列中的元素数量
+ * 
+ */
+import java.util.Iterator;
+
+ public class Queue<Item> implements Iterable<Item>
+ {
+    private Item[] a=null; //元素存储空间
+    private int N=0;//元素数量
+
+    public  Queue(){
+        a=(Item[]) new Object[2];//初始化2个元素空间
+    }
+
+    public boolean isEmpty(){return N==0;}
+    int size(){return N;}
+    void enqueue(Item item){
+        if(N==a.length) resize(2*a.length);
+        a[N++]=item;
+    }
+    public Item dequeue(){
+        if(N==0) return null;
+        Item ide=a[0];
+        N--;
+        for(int i=0;i<N;i++){
+            a[i]=a[i+1];
+        }
+        if(N==a.length/2 && a.length%2==0) resize(a.length/2);
+        return ide;
+    }
+    private void resize(int max){
+        Item[] temp=(Item[]) new Object[max];
+        for(int i=0;i<N;i++){
+            temp[i]=a[i];
+        }
+        a=temp;
+    }
+
+    public Iterator<Item> iterator(){
+        return new ReverseArrayIterator();
+    }
+
+    private class ReverseArrayIterator implements Iterator<Item>{
+        private int i=N;
+        public boolean hasNext(){return i>0;}
+        public Item next(){return a[--i];}
+        public void remove(){}
+
+    }
+
+
+ }
