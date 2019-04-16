@@ -1,0 +1,72 @@
+
+import java.util.Iterator;
+
+public class QueueL<Item> implements Iterable<Item>{
+
+    private Node first;
+    private Node last;
+    private int N;
+
+    public QueueL(){
+    }
+
+    public boolean isEmpty(){return first==null;}
+    public int size(){return N;}
+
+    public void enqueue(Item item){
+        if(first==null){
+            first=new Node();
+            last=first;
+        }else{
+            last.next=new Node();
+            last=last.next;
+        }
+        last.item=item;
+        N++;
+    }
+    public Item dequeue(){
+        Item item=first.item;
+        first=first.next;
+        N--;
+        if(first==null) last=null;
+        return item;
+    }
+
+    private class Node{
+        Item item;
+        Node next;
+    }
+
+    public Iterator<Item> iterator(){
+        return new ReverseArrayIterator();
+    }
+    private class ReverseArrayIterator implements Iterator<Item>{
+        private Node cur=first;
+        private Item curitem;
+
+        public boolean hasNext(){return cur!=null;}
+        public Item next(){curitem=cur.item;cur=cur.next;return curitem;}
+        public void remove(){}
+    }
+
+    public static void main(String[] args){
+        QueueL<String> ql=new QueueL<String>();
+
+        ql.enqueue("hello");
+        ql.enqueue(" ");
+        ql.enqueue("World");
+        ql.enqueue("!");
+
+        System.out.println("size of QueueL is "+ql.size());
+        for(String s:ql)
+            System.out.print(s);
+
+        for(int i=0;i<4;i++){
+            System.out.println("\ndequeue of QueueL is "+ql.dequeue());
+            System.out.println("size of QueueL is "+ql.size());
+            for(String s:ql)
+                System.out.print(s);       
+        }
+        
+    }
+}
