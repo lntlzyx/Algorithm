@@ -1,0 +1,62 @@
+/*堆栈（后进先出）
+*
+*/
+import java.util.Iterator;
+
+public class Stack<Item> implements Iterable<Item>{
+    private Item[] s=null;
+    private int N=0;
+
+    public Stack(){
+        s=(Item[]) new Object[2];
+    }
+
+    public boolean isEmpty(){return N==0;}
+    public int size(){return N;}
+
+    public void push(Item item){
+        if(N==s.length) resize(s.length*2);
+        s[N++]=item;
+    }
+    public Item pop(){
+        if(N==0)    return null;
+        Item item=s[N-1];
+        s[--N]=null;
+        if(N==s.length/2 && s.length%2==0) resize(s.length/2);
+        return item;
+    }
+    private void resize(int max){
+        Item[] item=(Item[])new Object[max];
+        for(int i=0;i<N;i++)
+            item[i]=s[i];
+        s=item;
+    }
+
+    public  Iterator<Item> iterator(){
+        return new ReverseArrayIteator();
+    }
+
+    private class ReverseArrayIteator implements Iterator<Item>{
+        private int i=N;
+        public boolean hasNext(){return i>0;}
+        public Item next(){return s[--i];}
+        public void remove(){}
+    }
+    public static void main(String[] args){
+        Stack<String> stack=new Stack<String>();
+
+        stack.push("Hello");
+        stack.push(" ");
+        stack.push("World!");
+        stack.push(String.valueOf(11));
+        
+        System.out.println("size of stack is "+stack.size());
+        for(String s:stack)
+            System.out.println("element of stack is "+s);
+
+        System.out.println("pop of stack is "+stack.pop());
+        System.out.println("size of stack is "+stack.size());
+    }
+
+    
+}
