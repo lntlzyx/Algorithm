@@ -1,0 +1,74 @@
+
+
+import java.util.Iterator;
+
+public class BagL<Item> implements Iterable<Item>{
+    private int N;
+    private Node first;
+
+    //构造函数
+    public BagL(){
+    }
+
+    public boolean isEmpty(){return N>0;}
+    public int size(){return N;}
+
+    public void add(Item item){
+        if(first==null){
+            first=new Node();
+            first.item=item;
+            N++;
+        }else{
+            Node temp=new Node();
+            temp.item=item;
+            temp.next=first;
+            first=temp;
+            N++;
+        }
+    }
+
+    public Item delete(){
+        if(first==null) return null;
+        Item item=first.item;
+        first=first.next;
+        N--;
+        return item;
+    }
+
+    public Iterator iterator(){
+        return new ReverseLinkIterator();
+    }
+
+    private class ReverseLinkIterator implements Iterator<Item>{
+        private Item i;
+        private Node cn=first;
+        public boolean hasNext(){return cn!=null;}
+        public Item next(){i=cn.item;cn=cn.next;return i;}
+        public void remove(){}
+    }
+
+    private class Node{
+        Item item;
+        Node next;
+    }
+
+    public static void main(String[] args){
+        BagL<String> bl=new BagL();
+
+        bl.add("Hello");
+        bl.add(" ");
+        bl.add("world");
+        bl.add("!");
+
+        System.out.println("size of bagl is "+bl.size());
+        for(String s:bl)
+            System.out.print(s);
+        System.out.println("");
+
+        System.out.println("delete of bagl is "+bl.delete());
+        for(String s:bl)
+            System.out.print(s);      
+        System.out.println(""); 
+    }
+
+}
